@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import express from 'express';
 import { StaticRouter } from 'react-router-dom';
-import App from './components/App';
+import App from './App';
 import path from 'path';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -11,10 +11,12 @@ import rootReducer, { rootSaga } from './modules';
 import PreloadContext from './lib/preloaderContext';
 import { END } from 'redux-saga';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
+import { Helmet } from 'react-helmet';
 
 const statsFile = path.resolve('./build/loadable-stats.json');
 
-function createPage(root, tags) {
+function createPage(root, tags, helmet) {
+    const { title, meta } = helmet;
     return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -25,7 +27,8 @@ function createPage(root, tags) {
       content="width=device-width,initial-scale=1,shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000" />
-    <title>React App</title>
+    ${title.toString()}
+    ${meta.toString()}
     ${tags.styles}
     ${tags.links}
   </head>
@@ -77,7 +80,9 @@ const serverRender = async (req, res, next) => {
         return res.status(500);
     }
     preloadContext.done = true;
+
     const root = ReactDOMServer.renderToString(jsx);
+    const helmet = Helmet.renderStatic();
     const stateString = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
     const stateScript = `<script>__PRELOADED_STATE__ = ${stateString}</script>`;
     const tags = {
@@ -86,7 +91,7 @@ const serverRender = async (req, res, next) => {
         styles: extractor.getStyleTags()
     };
 
-    res.send(createPage(root, tags));
+    res.send(createPage(root, tags, helmet));
 };
 
 const serve = express.static(path.resolve('./build'), {

@@ -3,8 +3,15 @@ import React from 'react';
 const Post = ({ post, id, loadingPost }) => {
     return (
         <div>
-            <h1>{loadingPost && 'loading'}</h1>
-            <h1>{!loadingPost && post && `${post.id} - ${post.title}`}</h1>
+            {loadingPost && 'loading'}
+            {!loadingPost && post && (
+                <>
+                    <h1>
+                        {post.id} - {post.title}
+                    </h1>
+                    <p>{post.body}</p>
+                </>
+            )}
         </div>
     );
 };

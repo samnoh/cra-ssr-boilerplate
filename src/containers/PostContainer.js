@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import Post from '../components/Post';
 import { getPost } from '../modules/post';
@@ -16,7 +17,14 @@ const PostContainer = ({ id, post, loadingPost, getPost }) => {
         fn();
     }, [getPost, id]);
 
-    return <Post id={id} post={post} loadingPost={loadingPost} />;
+    return (
+        <>
+            <Helmet>
+                <title>Post</title>
+            </Helmet>
+            <Post id={id} post={post} loadingPost={loadingPost} />
+        </>
+    );
 };
 
 export default connect(
