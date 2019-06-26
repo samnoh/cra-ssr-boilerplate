@@ -21,12 +21,12 @@ function createPage(root, tags, helmet) {
   <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta
       name="viewport"
       content="width=device-width,initial-scale=1,shrink-to-fit=no"
     />
-    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     ${title.toString()}
     ${meta.toString()}
     ${tags.styles}
@@ -101,6 +101,6 @@ const serve = express.static(path.resolve('./build'), {
 app.use(serve);
 app.use(serverRender);
 
-app.listen(5000, () => {
-    console.log('Running on http://localhost:5000');
+app.listen(5001, () => {
+    console.log('Running on http://localhost:5001');
 });

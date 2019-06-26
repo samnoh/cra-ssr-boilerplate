@@ -12,14 +12,14 @@ const initialState = {};
 const loading = handleActions(
     {
         [START_LOADING]: (state, action) => {
-            console.log('Start', action.payload); // sample/GET_POST
+            console.log('Start', action.payload);
             return {
                 ...state,
                 [action.payload]: true
             };
         },
         [FINISH_LOADING]: (state, action) => {
-            console.log('Finish', action.payload); // sample/GET_POST
+            console.log('Finish', action.payload);
             return {
                 ...state,
                 [action.payload]: false

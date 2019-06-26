@@ -3,14 +3,14 @@ import { Switch, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 const HomePage = loadable(() => import('./pages/HomePage'));
-const PostPage = loadable(() => import('./pages/PostPage'));
+const UsersPage = loadable(() => import('./pages/UsersPage'));
 const NotFound = loadable(() => import('./components/NotFound'));
 
 const Routes = () => {
     return (
         <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/post/:id?" render={({ match }) => <PostPage id={match.params.id} />} />
+            <Route exact path="/users" component={UsersPage} />
             <Route
                 path="/:message"
                 render={({ match }) => <NotFound message={match.params.message} />}
