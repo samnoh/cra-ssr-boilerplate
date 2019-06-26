@@ -9,7 +9,7 @@ const UsersContainer = ({ users, getUsers, loading }) => {
         if (users) return;
         const fn = async () => {
             try {
-                getUsers();
+                await getUsers();
             } catch (e) {
                 console.error(e);
             }
