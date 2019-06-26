@@ -2,9 +2,9 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 
-const HomePage = loadable(() => import('pages/HomePage'));
-const PostPage = loadable(() => import('pages/PostPage'));
-const NotFound = loadable(() => import('components/NotFound'));
+const HomePage = loadable(() => import('./pages/HomePage'));
+const PostPage = loadable(() => import('./pages/PostPage'));
+const NotFound = loadable(() => import('./components/NotFound'));
 
 const Routes = () => {
     return (

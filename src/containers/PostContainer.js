@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import Post from 'components/Post';
-import { getPost } from 'modules/post';
+import Post from '../components/Post';
+import { getPost } from '../modules/post';
 
 const PostContainer = ({ id, post, loadingPost, getPost }) => {
     useEffect(() => {

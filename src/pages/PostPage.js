@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import PostContainer from 'containers/PostContainer';
+import PostContainer from '../containers/PostContainer';
 
 const PostPage = ({ id }) => {
     return (
