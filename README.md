@@ -1,5 +1,10 @@
 # CRA + SSR Boilerplate
 
+-   create-react-app (ejected)
+-   express
+-   redux-saga
+-   react-router-dom
+
 ## Install Packages
 
 ```shell
