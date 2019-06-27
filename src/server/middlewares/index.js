@@ -12,6 +12,7 @@ import App from '../../App';
 import rootReducer, { rootSaga } from '../../modules';
 import PreloadContext from '../../lib/preloaderContext';
 import createPage from '../util/createPage';
+import { RoutesMap } from '../../Routes';
 
 export const serverRender = async (req, res, next) => {
     const context = {};
@@ -58,5 +59,8 @@ export const serverRender = async (req, res, next) => {
     };
     const helmet = Helmet.renderStatic();
 
+    if (context.isNotFound) {
+        res.status(404);
+    }
     res.send(createPage(root, tags, helmet));
 };
