@@ -25,3 +25,15 @@ npm run build:server
 ```shell
 npm run start:server
 ```
+
+## SSR
+
+-   `<Preloader resolve={dispatch()} />`
+-   If you do not want SSR for specific pages, just do not add `<Preloader .../>
+
+```javascript
+import { Preloader } from '../lib/preloaderContext'
+...
+<User user={user} loading={loading} />
+<Preloader resolve={() => getUser(id)} />
+```
