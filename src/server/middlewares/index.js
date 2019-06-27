@@ -11,22 +11,17 @@ import path from 'path';
 import App from '../../App';
 import rootReducer, { rootSaga } from '../../modules';
 import PreloadContext from '../../lib/preloaderContext';
-
 import createPage from '../util/createPage';
 
 export const serverRender = async (req, res, next) => {
     const context = {};
     const sagaMiddleware = createSagaMiddleware();
-
     const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-
     const sagaPromise = sagaMiddleware.run(rootSaga).toPromise();
-
     const preloadContext = {
         done: false,
         promises: []
     };
-
     const extractor = new ChunkExtractor({
         statsFile: path.resolve('./build/loadable-stats.json')
     });
@@ -42,8 +37,8 @@ export const serverRender = async (req, res, next) => {
             </PreloadContext.Provider>
         </ChunkExtractorManager>
     );
-
     ReactDOMServer.renderToStaticMarkup(jsx);
+
     store.dispatch(END);
     try {
         await sagaPromise;
@@ -54,14 +49,14 @@ export const serverRender = async (req, res, next) => {
     preloadContext.done = true;
 
     const root = ReactDOMServer.renderToString(jsx);
-    const helmet = Helmet.renderStatic();
-    const stateString = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
-    const stateScript = `<script>__PRELOADED_STATE__ = ${stateString}</script>`;
+    const escapedString = JSON.stringify(store.getState()).replace(/</g, '\\u003c');
+    const stateScript = `<script>__PRELOADED_STATE__ = ${escapedString}</script>`;
     const tags = {
         scripts: stateScript + extractor.getScriptTags(),
         links: extractor.getLinkTags(),
         styles: extractor.getStyleTags()
     };
+    const helmet = Helmet.renderStatic();
 
     res.send(createPage(root, tags, helmet));
 };
