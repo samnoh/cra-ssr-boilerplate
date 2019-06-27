@@ -2,7 +2,7 @@
 
 -   create-react-app (ejected)
 -   express
--   code splitting(@loadable/component)
+-   code splitting (@loadable/component)
 -   redux-saga
 -   react-router-dom
 -   react-helmet

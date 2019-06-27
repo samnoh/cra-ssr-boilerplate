@@ -12,9 +12,8 @@ import App from '../../App';
 import rootReducer, { rootSaga } from '../../modules';
 import PreloadContext from '../../lib/preloaderContext';
 import createPage from '../util/createPage';
-import { RoutesMap } from '../../Routes';
 
-export const serverRender = async (req, res, next) => {
+const serverRender = async (req, res, next) => {
     const context = {};
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -64,3 +63,5 @@ export const serverRender = async (req, res, next) => {
     }
     res.send(createPage(root, tags, helmet));
 };
+
+export default serverRender;

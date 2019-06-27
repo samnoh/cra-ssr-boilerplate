@@ -9,8 +9,9 @@ import createSagaMiddleware from 'redux-saga';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import './index.css';
 import rootReducer, { rootSaga } from './modules';
+
+import './index.css';
 
 const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();

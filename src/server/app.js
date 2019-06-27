@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 
-import { serverRender } from './middlewares';
+import serverRender from './middlewares/ssr';
 
 const app = express();
 
