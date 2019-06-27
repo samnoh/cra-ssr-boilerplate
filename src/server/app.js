@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import express from 'express';
 import { StaticRouter } from 'react-router-dom';
-import App from './App';
+import App from '../App';
 import path from 'path';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer, { rootSaga } from './modules';
-import PreloadContext from './lib/preloaderContext';
+import rootReducer, { rootSaga } from '../modules';
+import PreloadContext from '../lib/preloaderContext';
 import { END } from 'redux-saga';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import { Helmet } from 'react-helmet';
+import logger from 'morgan';
 
 const statsFile = path.resolve('./build/loadable-stats.json');
 
@@ -98,6 +99,7 @@ const serve = express.static(path.resolve('./build'), {
     index: false
 });
 
+app.use(logger('dev'));
 app.use(serve);
 app.use(serverRender);
 

@@ -5,12 +5,12 @@ import { Helmet } from 'react-helmet';
 const Users = ({ users, loading }) => {
     return (
         <>
+            <Helmet>
+                <title>Users</title>
+            </Helmet>
             {loading && <h1>Loading</h1>}
             {!loading && users && (
                 <>
-                    <Helmet>
-                        <title>Users</title>
-                    </Helmet>
                     <ul>
                         {users.map(user => (
                             <li key={user.id}>
