@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import User from '../components/User';
-import { getUser } from '../modules/user';
+import { getUser } from '../modules/users';
 import { Preloader } from '../lib/preloaderContext';
 
 const UserContainer = ({ id, user, getUser, loading }) => {
@@ -27,9 +27,9 @@ const UserContainer = ({ id, user, getUser, loading }) => {
 };
 
 export default connect(
-    ({ user, loading }) => ({
-        user: user.user,
-        loading: loading['user/GET_USER']
+    ({ users, loading }) => ({
+        user: users.user,
+        loading: loading['users/GET_USER']
     }),
     {
         getUser
